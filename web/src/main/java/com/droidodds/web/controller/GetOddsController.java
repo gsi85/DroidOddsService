@@ -3,7 +3,7 @@ package com.droidodds.web.controller;
 import com.droidodds.domain.card.Card;
 import com.droidodds.domain.odds.Odds;
 import com.droidodds.service.OddsCalculatorService;
-import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.WebDataBinder;
@@ -22,8 +22,8 @@ public class GetOddsController {
     private OddsCalculatorService oddsCalculatorService;
 
     @GetMapping(value = "/getOdds", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Odds handleOddsRequest(@RequestParam(value = "cards") List<Card> cards) {
-        return oddsCalculatorService.calculateOdds(null);
+    public Odds handleOddsRequest(@RequestParam(value = "cardsInHand") Set<Card> cardsInHand, @RequestParam(value = "cardsOnDeck") Set<Card> cardsOnDeck) {
+        return oddsCalculatorService.calculateOdds(cardsInHand, cardsOnDeck);
     }
 
     @InitBinder

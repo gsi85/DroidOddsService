@@ -46,6 +46,13 @@ public class FivCardsEvaluator implements HandEvaluator {
         return new EvaluatedHand(hand, ascendingSortedDistinctRanks);
     }
 
+    private void preProcess(final List<Card> cards, final Set<Suit> suits, final Multiset<Rank> ranks) {
+        cards.forEach(card -> {
+            suits.add(card.getSuit());
+            ranks.add(card.getRank());
+        });
+    }
+
     private Hand evaluateFiveDistinctCards(final Set<Suit> suits, final LinkedList<Rank> ascendingSortedDistinctRanks, final Rank first) {
         Hand hand;
         final boolean flush = suits.size() == 1;
@@ -69,13 +76,6 @@ public class FivCardsEvaluator implements HandEvaluator {
 
     private Hand evaluateTwoDistinctCount(final Multiset<Rank> ranks, final Rank first) {
         return ranks.count(first) == 3 ? Hand.FULL_HOUSE : Hand.FOUR_OF_A_KIND;
-    }
-
-    private void preProcess(final List<Card> cards, final Set<Suit> suits, final Multiset<Rank> ranks) {
-        cards.forEach(card -> {
-            suits.add(card.getSuit());
-            ranks.add(card.getRank());
-        });
     }
 
     private LinkedList<Rank> sortRanks(final Multiset<Rank> ranks) {
