@@ -12,8 +12,8 @@ public class CardsEditorSupport extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        String rankShortName = text.substring(1, 2).toUpperCase();
         String suitShortName = text.substring(0, 1).toUpperCase();
+        String rankShortName = text.substring(1).toUpperCase();
         setValue(new Card(Rank.getByShortName(rankShortName), Suit.getByShortName(suitShortName)));
     }
 
