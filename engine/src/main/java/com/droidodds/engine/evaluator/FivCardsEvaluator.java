@@ -4,6 +4,7 @@ import com.droidodds.domain.card.Card;
 import com.droidodds.domain.card.Rank;
 import com.droidodds.domain.card.Suit;
 import com.droidodds.domain.hand.Hand;
+import com.droidodds.engine.evaluator.domain.EvaluatedHand;
 import com.google.common.collect.EnumMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Ordering;
@@ -11,16 +12,18 @@ import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Laszlo_Sisa
  */
+@Component
 public class FivCardsEvaluator implements HandEvaluator {
 
     private final Ordering<Multiset.Entry<Rank>> byCountThenRank = new CountThenRankOrdering();
 
     @Override
-    public Hand evaluate(List<Card> cards) {
+    public EvaluatedHand evaluate(List<Card> cards) {
         Hand hand;
         final Set<Suit> suits = EnumSet.noneOf(Suit.class);
         final Multiset<Rank> ranks = EnumMultiset.create(Rank.class);
@@ -40,7 +43,7 @@ public class FivCardsEvaluator implements HandEvaluator {
             hand = evaluateTwoDistinctCount(ranks, first);
         }
 
-        return hand;
+        return new EvaluatedHand(hand, ascendingSortedDistinctRanks);
     }
 
     private Hand evaluateFiveDistinctCards(final Set<Suit> suits, final LinkedList<Rank> ascendingSortedDistinctRanks, final Rank first) {

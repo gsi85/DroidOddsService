@@ -1,11 +1,10 @@
 package com.droidodds.engine.evaluator;
 
-import static org.junit.Assert.*;
-
 import com.droidodds.domain.card.Card;
 import com.droidodds.domain.card.Rank;
 import com.droidodds.domain.card.Suit;
 import com.droidodds.domain.hand.Hand;
+import com.droidodds.engine.evaluator.domain.EvaluatedHand;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -37,8 +36,8 @@ public class FivCardsEvaluatorTest {
 
     @Test
     public void testEvaluateWhenCalledShouldEvaluateHand() {
-        final Hand actual = underTest.evaluate(cardsInHand);
-        Assert.assertEquals(expectedHand, actual);
+        final EvaluatedHand actual = underTest.evaluate(cardsInHand);
+        Assert.assertEquals(expectedHand, actual.getHand());
     }
 
     @Parameterized.Parameters

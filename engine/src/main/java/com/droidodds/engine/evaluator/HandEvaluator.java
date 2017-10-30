@@ -1,7 +1,7 @@
 package com.droidodds.engine.evaluator;
 
 import com.droidodds.domain.card.Card;
-import com.droidodds.domain.hand.Hand;
+import com.droidodds.engine.evaluator.domain.EvaluatedHand;
 import java.util.List;
 
 /**
@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface HandEvaluator {
 
-    Hand evaluate(List<Card> cards);
+    EvaluatedHand evaluate(List<Card> cards);
 
 }
