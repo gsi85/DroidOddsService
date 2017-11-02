@@ -22,7 +22,7 @@ public class GetOddsController {
     private OddsCalculatorService oddsCalculatorService;
 
     @GetMapping(value = "/getOdds", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Odds handleOddsRequest(@RequestParam(value = "cardsInHand") Set<Card> cardsInHand, @RequestParam(value = "cardsOnDeck") Set<Card> cardsOnDeck) {
+    public Odds handleOddsRequest(@RequestParam(value = "cardsInHand") Set<Card> cardsInHand, @RequestParam(value = "cardsOnDeck", required = false) Set<Card> cardsOnDeck) {
         return oddsCalculatorService.calculateOdds(cardsInHand, cardsOnDeck);
     }
 
