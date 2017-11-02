@@ -2,6 +2,7 @@ package com.droidodds.engine;
 
 import com.droidodds.domain.card.Card;
 import com.droidodds.domain.odds.Odds;
+import com.droidodds.engine.evaluator.HandEvaluator;
 import com.droidodds.engine.evaluator.SevenCardsEvaluator;
 import com.droidodds.engine.evaluator.domain.CompleteDeck;
 import com.droidodds.engine.evaluator.domain.EvaluatedHand;
@@ -26,7 +27,7 @@ public class MultiThreadedOddsCalculator implements OddsCalculator {
     @Autowired
     private UnOrderedPermutationFactory unOrderedPermutationFactory;
     @Autowired
-    private SevenCardsEvaluator sevenCardsEvaluator;
+    private HandEvaluator sevenCardsEvaluator;
 
     @Override
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {

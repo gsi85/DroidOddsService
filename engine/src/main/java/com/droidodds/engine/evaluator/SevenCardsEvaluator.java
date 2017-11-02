@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +24,7 @@ public class SevenCardsEvaluator implements HandEvaluator {
     private HandEvaluator fivCardsEvaluator;
 
     @Override
+    @Cacheable("EvaluatedHand")
     public EvaluatedHand evaluate(final List<Card> cards) {
         EvaluatedHand bestHand = LOWEST_POSSIBLE_HAND;
 

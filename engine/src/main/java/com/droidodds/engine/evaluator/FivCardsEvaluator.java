@@ -12,6 +12,7 @@ import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +24,7 @@ public class FivCardsEvaluator implements HandEvaluator {
     private final Ordering<Multiset.Entry<Rank>> byCountThenRank = new CountThenRankOrdering();
 
     @Override
+    @Cacheable("EvaluatedHand")
     public EvaluatedHand evaluate(List<Card> cards) {
         Hand hand;
         final Set<Suit> suits = EnumSet.noneOf(Suit.class);
