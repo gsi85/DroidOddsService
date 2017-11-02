@@ -70,7 +70,7 @@ public class MultiThreadedOddsCalculator implements OddsCalculator {
 
     private List<Set<Card>> getOpponentCombinations(final List<Card> availableCards, final Set<Card> deck) {
         List<Card> availCardsWODeck = new ArrayList<>(availableCards);
-        availableCards.removeAll(deck);
+        availCardsWODeck.removeAll(deck);
         return unOrderedPermutationFactory.getUnOrderedPermutationWithoutRepetition(availCardsWODeck, OPONENT_CARD_COUNT);
     }
 
