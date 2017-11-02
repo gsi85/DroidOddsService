@@ -31,7 +31,7 @@ public class MultiThreadedOddsCalculator implements OddsCalculator {
     @Override
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
 
-        List<Card> availableCards = CompleteDeck.getCompleteDeck().stream().filter(card -> !cardsInHand.contains(card)).collect(Collectors.toList());
+        List<Card> availableCards = CompleteDeck.getCompleteDeck().stream().filter(card -> !cardsInHand.contains(card) && !cardsOnDeck.contains(card)).collect(Collectors.toList());
         List<Set<Card>> cardsOnDeckCombinations = getCardsOnDeckCombinations(cardsOnDeck, availableCards);
 
         return getOdds(cardsInHand, cardsOnDeck, cardsOnDeckCombinations, availableCards);
