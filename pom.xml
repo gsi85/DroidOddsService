@@ -12,6 +12,7 @@
 		<module>domain</module>
 		<module>service</module>
     <module>engine</module>
+    <module>acceptance-test</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -60,6 +61,11 @@
         <artifactId>engine</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
+			<dependency>
+				<groupId>com.sisa.droidodds</groupId>
+				<artifactId>acceptance-test</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
