@@ -24,7 +24,7 @@ public class SevenCardsEvaluator implements HandEvaluator {
     private HandEvaluator fivCardsEvaluator;
 
     @Override
-    @Cacheable("EvaluatedHand")
+    @Cacheable("sevenCardCache")
     public EvaluatedHand evaluate(final List<Card> cards) {
         EvaluatedHand bestHand = LOWEST_POSSIBLE_HAND;
 

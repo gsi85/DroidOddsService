@@ -24,7 +24,7 @@ public class FivCardsEvaluator implements HandEvaluator {
     private final Ordering<Multiset.Entry<Rank>> byCountThenRank = new CountThenRankOrdering();
 
     @Override
-    @Cacheable("EvaluatedHand")
+    @Cacheable("fiveCardCache")
     public EvaluatedHand evaluate(List<Card> cards) {
         Hand hand;
         final Set<Suit> suits = EnumSet.noneOf(Suit.class);
