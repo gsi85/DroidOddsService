@@ -20,6 +20,7 @@ class OddsExceptionHandler {
             LOGGER.error("Rejecting request with reason: {}", exception.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
+           LOGGER.error("Unknown error occurred: {}", exception);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

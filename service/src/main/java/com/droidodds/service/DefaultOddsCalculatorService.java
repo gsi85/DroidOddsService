@@ -23,7 +23,8 @@ public class DefaultOddsCalculatorService implements OddsCalculatorService {
 
     @Override
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
-        cardsInputValidator.validateInput(cardsInHand, cardsOnDeck);
-        return oddsCalculator.calculateOdds(cardsInHand, cardsOnDeck != null ? cardsOnDeck : Collections.emptySet());
+        Set<Card> onDeck = cardsOnDeck != null ? cardsOnDeck : Collections.emptySet();
+        cardsInputValidator.validateInput(cardsInHand, onDeck);
+        return oddsCalculator.calculateOdds(cardsInHand, onDeck);
     }
 }
