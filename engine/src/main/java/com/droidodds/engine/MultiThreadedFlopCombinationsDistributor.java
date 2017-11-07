@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
     private OddsCalculator multiThreadedOddsCalculator;
     @Autowired
     private UnOrderedPermutationFactory unOrderedPermutationFactory;
-    private Executor executor = new ForkJoinPool();
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     @Override
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
@@ -42,6 +42,14 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
         return combineOdds(joinedTasks);
     }
 
+    private List<CompletableFuture<Odds>> createTasks(final Set<Card> cardsInHand, final List<Set<Card>> flopCombinations) {
+        return flopCombinations.stream().map(cardsOnDeck -> calculateOddsFuture(cardsInHand, cardsOnDeck)).collect(Collectors.toList());
+    }
+
+    private CompletableFuture<Odds> calculateOddsFuture(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
+        return CompletableFuture.supplyAsync(() -> multiThreadedOddsCalculator.calculateOdds(cardsInHand, cardsOnDeck), executor);
+    }
+
     private Odds combineOdds(final CompletableFuture<List<Odds>> joinedTasks) {
         int winCount = 0;
         int splitCount = 0;
@@ -54,14 +62,6 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
             totalDealCount += odds.getTotalDealCount() / oddSize;
         }
         return new Odds(winCount, splitCount, totalDealCount);
-    }
-
-    private List<CompletableFuture<Odds>> createTasks(final Set<Card> cardsInHand, final List<Set<Card>> flopCombinations) {
-        return flopCombinations.stream().map(cardsOnDeck -> calculateOddsFuture(cardsInHand, cardsOnDeck)).collect(Collectors.toList());
-    }
-
-    private CompletableFuture<Odds> calculateOddsFuture(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
-        return CompletableFuture.supplyAsync(() -> multiThreadedOddsCalculator.calculateOdds(cardsInHand, cardsOnDeck), executor);
     }
 
     private static <T> CompletableFuture<List<T>> sequence(List<CompletableFuture<T>> futures) {

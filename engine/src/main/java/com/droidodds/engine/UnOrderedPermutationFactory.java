@@ -22,7 +22,7 @@ class UnOrderedPermutationFactory {
 
     private void fillUpPermutations(final List<Set<Card>> permutations, final List<Card> availableCards, final Stack<Card> currentSubset, final int requiredLength, final int currentIndex) {
         for (int i = currentIndex; i < availableCards.size(); i++) {
-            currentSubset.push(availableCards.get(currentIndex));
+            currentSubset.push(availableCards.get(i));
             if (currentSubset.size() == requiredLength) {
                 permutations.add(new HashSet<>(currentSubset));
             } else {
