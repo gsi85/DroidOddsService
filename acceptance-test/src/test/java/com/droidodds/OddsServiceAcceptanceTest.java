@@ -25,13 +25,13 @@ import org.springframework.test.web.servlet.MockMvc;
 public class OddsServiceAcceptanceTest {
 
     private static final String THREE_CARDS_ON_DECK = "?cardsInHand=S7&cardsInHand=CK&cardsOnDeck=D7&cardsOnDeck=SJ&cardsOnDeck=HA";
-    private static final String EXPECTED_THREE_CARDS_ON_DECK_RESULT = "{\"winCount\":695754,\"splitCount\":1836,\"totalDealCount\":1070190}";
+    private static final String EXPECTED_THREE_CARDS_ON_DECK_RESULT = "{\"winCount\":708218,\"splitCount\":21623,\"totalDealCount\":1070190}";
 
     private static final String FOUR_CARDS_ON_DECK = "?cardsInHand=C5&cardsInHand=D10&cardsOnDeck=H10&cardsOnDeck=HJ&cardsOnDeck=SJ&cardsOnDeck=S5";
-    private static final String EXPECTED_FOUR_CARDS_ON_DECK_RESULT = "{\"winCount\":38870,\"splitCount\":1426,\"totalDealCount\":45540}";
+    private static final String EXPECTED_FOUR_CARDS_ON_DECK_RESULT = "{\"winCount\":34198,\"splitCount\":2154,\"totalDealCount\":45540}";
 
     private static final String FIVE_CARDS_ON_DECK = "?cardsInHand=DQ&cardsInHand=C5&cardsOnDeck=s5&cardsOnDeck=sJ&cardsOnDeck=h9&cardsOnDeck=h5&cardsOnDeck=s3";
-    private static final String EXPECTED_FIVE_CARDS_ON_DECK_RESULT = "{\"winCount\":803,\"splitCount\":0,\"totalDealCount\":990}";
+    private static final String EXPECTED_FIVE_CARDS_ON_DECK_RESULT = "{\"winCount\":916,\"splitCount\":3,\"totalDealCount\":990}";
 
     @Value("classpath:expected_for_three_on_deck.json")
     private Resource expectThreeOnDeckResult;
