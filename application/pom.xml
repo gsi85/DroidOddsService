@@ -24,6 +24,16 @@
       <groupId>com.sisa.droidodds</groupId>
       <artifactId>engine</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.cache2k</groupId>
+      <artifactId>cache2k-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.cache2k</groupId>
+      <artifactId>cache2k-all</artifactId>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
 </project>
