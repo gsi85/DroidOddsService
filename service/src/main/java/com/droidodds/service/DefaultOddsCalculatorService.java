@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class DefaultOddsCalculatorService implements OddsCalculatorService {
 
     @Autowired
-    private OddsCalculator oddsCalculator;
+    private OddsCalculator multiThreadedFlopCombinationsDistributor;
 
     @Autowired
     private CardsInputValidator cardsInputValidator;
@@ -25,6 +25,6 @@ public class DefaultOddsCalculatorService implements OddsCalculatorService {
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
         Set<Card> onDeck = cardsOnDeck != null ? cardsOnDeck : Collections.emptySet();
         cardsInputValidator.validateInput(cardsInHand, onDeck);
-        return oddsCalculator.calculateOdds(cardsInHand, onDeck);
+        return multiThreadedFlopCombinationsDistributor.calculateOdds(cardsInHand, onDeck);
     }
 }

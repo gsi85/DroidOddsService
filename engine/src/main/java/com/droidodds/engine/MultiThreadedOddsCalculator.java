@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MultiThreadedOddsCalculator implements OddsCalculator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MultiThreadedOddsCalculator.class);
 
     @Autowired
     private UnOrderedPermutationFactory unOrderedPermutationFactory;
@@ -27,19 +31,14 @@ public class MultiThreadedOddsCalculator implements OddsCalculator {
 
     @Override
     public Odds calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
-
-        List<Card> availableCards = CompleteDeck.getCompleteDeck().stream().filter(card -> !cardsInHand.contains(card) && !cardsOnDeck.contains(card)).collect(Collectors.toList());
-        List<Set<Card>> cardsOnDeckCombinations = getCardsOnDeckCombinations(cardsOnDeck, availableCards);
-
-        List<CompletableFuture<Odds>> tasks = createTasks(cardsInHand, cardsOnDeck, availableCards, cardsOnDeckCombinations);
-
-        CompletableFuture<List<Odds>> oddsTasks = sequence(tasks);
-
-        return combineOdds(oddsTasks);
+        LOGGER.info("Calculating odds for cards in hand: {}, cards on deck: {}", cardsInHand, cardsOnDeck);
+        CompletableFuture<List<Odds>> joinedTasks = sequence(createTasks(cardsInHand, cardsOnDeck));
+        return combineOdds(joinedTasks);
     }
 
-    private List<CompletableFuture<Odds>> createTasks(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck, final List<Card> availableCards, final List<Set<Card>> cardsOnDeckCombinations) {
-        return cardsOnDeckCombinations.stream().map(onDeckChunk -> oddsCalculatorTask.calculateOdds(cardsInHand, cardsOnDeck, onDeckChunk, availableCards)).collect(Collectors.toList());
+    private List<CompletableFuture<Odds>> createTasks(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck) {
+        List<Card> availableCards = CompleteDeck.getCompleteDeck().stream().filter(card -> !cardsInHand.contains(card) && !cardsOnDeck.contains(card)).collect(Collectors.toList());
+        return getCardsOnDeckCombinations(cardsOnDeck, availableCards).stream().map(onDeckChunk -> oddsCalculatorTask.calculateOdds(cardsInHand, cardsOnDeck, onDeckChunk, availableCards)).collect(Collectors.toList());
     }
 
     private List<Set<Card>> getCardsOnDeckCombinations(final Set<Card> cardsOnDeck, final List<Card> availableCards) {

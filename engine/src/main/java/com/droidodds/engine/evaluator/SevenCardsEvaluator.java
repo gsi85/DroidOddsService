@@ -30,8 +30,7 @@ public class SevenCardsEvaluator implements HandEvaluator {
 
         for (int firstOutCardIndex = 0; firstOutCardIndex < cards.size() - 1; firstOutCardIndex++) {
             for (int secondCardOutIndex = firstOutCardIndex + 1; secondCardOutIndex < cards.size(); secondCardOutIndex++) {
-                List<Card> cardsToEvaluate = getCardsToEvaluate(cards, cards.get(firstOutCardIndex), cards.get(secondCardOutIndex));
-                EvaluatedHand currentHand = fivCardsEvaluator.evaluate(cardsToEvaluate);
+                EvaluatedHand currentHand = fivCardsEvaluator.evaluate(getCardsToEvaluate(cards, cards.get(firstOutCardIndex), cards.get(secondCardOutIndex)));
                 bestHand = currentHand.compareTo(bestHand) > 0 ? currentHand : bestHand;
             }
         }
@@ -41,7 +40,7 @@ public class SevenCardsEvaluator implements HandEvaluator {
     }
 
     private List<Card> getCardsToEvaluate(final List<Card> cards, final Card firstOutCard, final Card secondOutCard) {
-        return cards.stream().filter(card -> !card.equals(firstOutCard) && !card.equals(secondOutCard)).collect(Collectors.toList());
+        return cards.stream().filter(card -> !card.equals(firstOutCard) && !card.equals(secondOutCard)).sorted().collect(Collectors.toList());
     }
 
 }

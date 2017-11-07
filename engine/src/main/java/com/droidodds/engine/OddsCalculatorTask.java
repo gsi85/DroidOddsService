@@ -39,11 +39,11 @@ class OddsCalculatorTask {
         int totalDealCount = 0;
 
         deckCombination.addAll(cardsOnDeck);
-        EvaluatedHand playersHand = sevenCardsEvaluator.evaluate(Stream.concat(cardsInHand.stream(), deckCombination.stream()).collect(Collectors.toList()));
+        EvaluatedHand playersHand = sevenCardsEvaluator.evaluate(Stream.concat(cardsInHand.stream(), deckCombination.stream()).sorted().collect(Collectors.toList()));
 
         List<Set<Card>> opponentCombinations = getOpponentCombinations(availableCards, deckCombination);
         for (Set<Card> opponentCards : opponentCombinations) {
-            EvaluatedHand opponentHand = sevenCardsEvaluator.evaluate(Stream.concat(deckCombination.stream(), opponentCards.stream()).collect(Collectors.toList()));
+            EvaluatedHand opponentHand = sevenCardsEvaluator.evaluate(Stream.concat(deckCombination.stream(), opponentCards.stream()).sorted().collect(Collectors.toList()));
 
             final int compare = playersHand.compareTo(opponentHand);
             if (compare > 0) {
