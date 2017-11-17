@@ -23,7 +23,7 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
     @Autowired
     private OddsCalculator multiThreadedOddsCalculator;
     @Autowired
-    private UnOrderedPermutationFactory unOrderedPermutationFactory;
+    private UnOrderedPermutationFactory<Card> unOrderedPermutationFactory;
     private Executor executor = Executors.newSingleThreadExecutor();
 
     @Override
@@ -54,12 +54,10 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
         int winCount = 0;
         int splitCount = 0;
         int totalDealCount = 0;
-        List<Odds> joinedOdds = joinedTasks.join();
-        int oddSize = joinedOdds.size();
-        for (Odds odds : joinedOdds) {
-            winCount += odds.getWinCount() / oddSize;
-            splitCount += odds.getSplitCount() / oddSize;
-            totalDealCount += odds.getTotalDealCount() / oddSize;
+        for (Odds odds : joinedTasks.join()) {
+            winCount += odds.getWinCount();
+            splitCount += odds.getSplitCount();
+            totalDealCount += odds.getTotalDealCount();
         }
         return new Odds(winCount, splitCount, totalDealCount);
     }

@@ -12,21 +12,21 @@ import org.springframework.stereotype.Component;
  * @author Laszlo_Sisa
  */
 @Component
-class UnOrderedPermutationFactory {
+public class UnOrderedPermutationFactory<T> {
 
-    List<Set<Card>> getUnOrderedPermutationWithoutRepetition(final List<Card> availableCards, final int requiredLength) {
-        List<Set<Card>> permutations = new ArrayList<>();
-        fillUpPermutations(permutations, availableCards, new Stack<>(), requiredLength, 0);
+    public List<Set<T>> getUnOrderedPermutationWithoutRepetition(final List<T> availableElements, final int requiredLength) {
+        List<Set<T>> permutations = new ArrayList<>();
+        fillUpPermutations(permutations, availableElements, new Stack<>(), requiredLength, 0);
         return permutations;
     }
 
-    private void fillUpPermutations(final List<Set<Card>> permutations, final List<Card> availableCards, final Stack<Card> currentSubset, final int requiredLength, final int currentIndex) {
-        for (int i = currentIndex; i < availableCards.size(); i++) {
-            currentSubset.push(availableCards.get(i));
+    private void fillUpPermutations(final List<Set<T>> permutations, final List<T> availableElements, final Stack<T> currentSubset, final int requiredLength, final int currentIndex) {
+        for (int i = currentIndex; i < availableElements.size(); i++) {
+            currentSubset.push(availableElements.get(i));
             if (currentSubset.size() == requiredLength) {
                 permutations.add(new HashSet<>(currentSubset));
             } else {
-                fillUpPermutations(permutations, availableCards, currentSubset, requiredLength, i + 1);
+                fillUpPermutations(permutations, availableElements, currentSubset, requiredLength, i + 1);
             }
             currentSubset.pop();
         }

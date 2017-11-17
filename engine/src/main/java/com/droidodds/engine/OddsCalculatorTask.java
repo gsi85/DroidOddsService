@@ -26,7 +26,7 @@ class OddsCalculatorTask {
     @Autowired
     private HandEvaluator sevenCardsEvaluator;
     @Autowired
-    private UnOrderedPermutationFactory unOrderedPermutationFactory;
+    private UnOrderedPermutationFactory<Card> unOrderedPermutationFactory;
     private Executor executor = new ForkJoinPool();
 
     CompletableFuture<Odds> calculateOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck, final Set<Card> cardsOnDeckCombinations, final List<Card> availableCards) {
