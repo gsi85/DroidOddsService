@@ -9,24 +9,20 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>application</artifactId>
+  <artifactId>dao</artifactId>
 
   <dependencies>
-    <dependency>
-      <groupId>com.sisa.droidodds</groupId>
-      <artifactId>web</artifactId>
-    </dependency>
     <dependency>
       <groupId>com.sisa.droidodds</groupId>
       <artifactId>service</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sisa.droidodds</groupId>
-      <artifactId>engine</artifactId>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sisa.droidodds</groupId>
-      <artifactId>dao</artifactId>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
     </dependency>
   </dependencies>
 
