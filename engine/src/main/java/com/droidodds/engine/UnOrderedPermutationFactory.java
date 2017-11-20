@@ -1,6 +1,5 @@
 package com.droidodds.engine;
 
-import com.droidodds.domain.card.Card;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

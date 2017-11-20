@@ -1,5 +1,6 @@
 package com.droidodds.application.cache;
 
+import com.droidodds.application.loader.TwoKnownCardsDbLoader;
 import com.droidodds.domain.card.Card;
 import com.droidodds.engine.UnOrderedPermutationFactory;
 import com.droidodds.engine.evaluator.HandEvaluator;
@@ -26,10 +27,13 @@ public class FiveCardCacheLoader implements CommandLineRunner {
     private HandEvaluator fivCardsEvaluator;
     @Autowired
     private UnOrderedPermutationFactory<Card> unOrderedPermutationFactory;
+    @Autowired
+    private TwoKnownCardsDbLoader twoKnownCardsDbLoader;
 
     @Override
     public void run(final String... strings) throws Exception {
         loadFiveCardCache();
+        twoKnownCardsDbLoader.loadTwoKnownCardsDb();
     }
 
     private void loadFiveCardCache() {
