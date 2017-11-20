@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication(scanBasePackages = "com.droidodds")
 @EnableCaching
+@ExcludeFromTests
 public class OddsServiceApplication {
 
     public static void main(String[] args) {

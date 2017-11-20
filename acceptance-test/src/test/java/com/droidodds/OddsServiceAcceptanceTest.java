@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
  * @author Laszlo_Sisa
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {OddsServiceApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {TestOddsServiceApplication.class})
 @AutoConfigureMockMvc
 public class OddsServiceAcceptanceTest {
 

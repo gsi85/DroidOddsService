@@ -1,5 +1,6 @@
 package com.droidodds.application.cache;
 
+import com.droidodds.application.ExcludeFromTests;
 import com.droidodds.application.loader.TwoKnownCardsDbLoader;
 import com.droidodds.domain.card.Card;
 import com.droidodds.engine.UnOrderedPermutationFactory;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Laszlo_Sisa
  */
 @Component
+@ExcludeFromTests
 public class FiveCardCacheLoader implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FiveCardCacheLoader.class);
