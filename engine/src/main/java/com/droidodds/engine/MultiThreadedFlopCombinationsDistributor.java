@@ -51,9 +51,9 @@ public class MultiThreadedFlopCombinationsDistributor implements OddsCalculator 
     }
 
     private Odds combineOdds(final CompletableFuture<List<Odds>> joinedTasks) {
-        int winCount = 0;
-        int splitCount = 0;
-        int totalDealCount = 0;
+        long winCount = 0;
+        long splitCount = 0;
+        long totalDealCount = 0;
         for (Odds odds : joinedTasks.join()) {
             winCount += odds.getWinCount();
             splitCount += odds.getSplitCount();

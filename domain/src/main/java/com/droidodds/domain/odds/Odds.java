@@ -8,25 +8,25 @@ package com.droidodds.domain.odds;
  */
 public class Odds {
 
-    private final int winCount;
-    private final int splitCount;
-    private final int totalDealCount;
+    private final long winCount;
+    private final long splitCount;
+    private final long totalDealCount;
 
-    public Odds(final int winCount, final int splitCount, final int totalDealCount) {
+    public Odds(final long winCount, final long splitCount, final long totalDealCount) {
         this.winCount = winCount;
         this.splitCount = splitCount;
         this.totalDealCount = totalDealCount;
     }
 
-    public int getWinCount() {
+    public long getWinCount() {
         return winCount;
     }
 
-    public int getSplitCount() {
+    public long getSplitCount() {
         return splitCount;
     }
 
-    public int getTotalDealCount() {
+    public long getTotalDealCount() {
         return totalDealCount;
     }
 

@@ -77,9 +77,9 @@ public class MultiThreadedOddsCalculator implements OddsCalculator {
     }
 
     private Odds combineOdds(final CompletableFuture<List<Odds>> oddsTasks) {
-        int winCount = 0;
-        int splitCount = 0;
-        int totalDealCount = 0;
+        long winCount = 0;
+        long splitCount = 0;
+        long totalDealCount = 0;
         for (Odds odds : oddsTasks.join()) {
             winCount += odds.getWinCount();
             splitCount += odds.getSplitCount();

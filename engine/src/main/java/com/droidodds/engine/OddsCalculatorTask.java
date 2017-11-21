@@ -34,9 +34,9 @@ class OddsCalculatorTask {
     }
 
     private Odds getOdds(final Set<Card> cardsInHand, final Set<Card> cardsOnDeck, final Set<Card> deckCombination, final List<Card> availableCards) {
-        int winCount = 0;
-        int splitCount = 0;
-        int totalDealCount = 0;
+        long winCount = 0;
+        long splitCount = 0;
+        long totalDealCount = 0;
 
         deckCombination.addAll(cardsOnDeck);
         EvaluatedHand playersHand = sevenCardsEvaluator.evaluate(Stream.concat(cardsInHand.stream(), deckCombination.stream()).sorted().collect(Collectors.toList()));
