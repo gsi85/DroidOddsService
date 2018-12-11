@@ -36,7 +36,7 @@ public class FileBackedInMemoryOddsRepository implements OddsRepository {
 
     private final ConcurrentMap<List<Card>, Odds> oddsMap = new ConcurrentHashMap<>();
 
-    private final File oddsDatabaseFile = new File("C:/innovation/oddsDatabase.json");
+    private final File oddsDatabaseFile = new File("c:/Drive/OneDrive - EPAM/Sisa/Innovation/oddsDatabase.json");
 
     @Override
     public Odds getOdds(final Set<Card> cardsInHand) {

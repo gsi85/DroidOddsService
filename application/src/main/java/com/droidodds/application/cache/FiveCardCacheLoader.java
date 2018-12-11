@@ -40,8 +40,10 @@ public class FiveCardCacheLoader implements CommandLineRunner {
 
     private void loadFiveCardCache() {
         LOGGER.info("Warming up five card cache...");
+        long start = System.currentTimeMillis();
         unOrderedPermutationFactory.getUnOrderedPermutationWithoutRepetition(CompleteDeck.getCompleteDeck(), 5).forEach(this::loadVariationToCache);
-        LOGGER.info("Five card cache fully loaded.");
+        long end = System.currentTimeMillis();
+        LOGGER.info("Five card cache fully loaded, took {} ms.", end - start);
     }
 
     private void loadVariationToCache(Set<Card> variation) {
